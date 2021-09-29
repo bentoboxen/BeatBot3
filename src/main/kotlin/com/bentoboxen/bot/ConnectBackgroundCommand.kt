@@ -1,6 +1,7 @@
 package com.bentoboxen.bot
 
 import com.bentoboxen.player.GuildAudioPlayerManager
+import com.bentoboxen.player.GuildBackGroundTrackScheduler
 import dev.kord.common.entity.ChannelType
 import dev.kord.core.Kord
 import dev.kord.core.event.message.MessageCreateEvent
@@ -14,7 +15,7 @@ object ConnectBackgroundCommand : Command {
             guild.channels.firstOrNull {
                 it.type == ChannelType.GuildVoice && it.name == (params.firstOrNull() ?: "General")
             }?.let {
-                bot.manager.createPlayer(bot, guild.id, it.id)
+                bot.manager.createPlayer(bot, guild.id, it.id, GuildBackGroundTrackScheduler())
             }
         }
     }

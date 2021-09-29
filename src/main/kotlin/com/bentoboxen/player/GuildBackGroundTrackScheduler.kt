@@ -8,7 +8,7 @@ import com.sedmelluq.discord.lavaplayer.track.AudioTrackEndReason
 class GuildBackGroundTrackScheduler : AudioEventAdapter() {
     override fun onTrackEnd(player: AudioPlayer?, track: AudioTrack?, endReason: AudioTrackEndReason?) {
         if(endReason == AudioTrackEndReason.FINISHED) {
-            player?.playTrack(track)
+            player?.playTrack(track?.makeClone())
         }
     }
 }

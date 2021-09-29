@@ -6,6 +6,7 @@ import com.bentoboxen.s3.S3ResourceManager
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayer
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayerManager
 import com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager
+import com.sedmelluq.discord.lavaplayer.player.event.AudioEventAdapter
 import com.sedmelluq.discord.lavaplayer.source.AudioSourceManagers
 import dev.kord.common.entity.Snowflake
 import dev.kord.core.Kord
@@ -26,8 +27,8 @@ class GuildAudioPlayerManager {
         manager.loadItem(name, BotAudioLoadResultHandler(bot, guildId))
     }
 
-    suspend fun createPlayer(bot: Bot, guildId: Snowflake, channelId: Snowflake): GuildAudioPlayer? =
-        GuildAudioPlayer.create(bot, channelId, GuildTrackScheduler())?.also {
+    suspend fun createPlayer(bot: Bot, guildId: Snowflake, channelId: Snowflake, scheduler: AudioEventAdapter): GuildAudioPlayer? =
+        GuildAudioPlayer.create(bot, channelId, scheduler)?.also {
             logger.debug("save player ${bot.name}-$guildId of $it")
             guildPlayers[bot.name to guildId] = it
         }

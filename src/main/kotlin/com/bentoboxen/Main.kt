@@ -20,7 +20,8 @@ suspend fun main(vararg params: String) {
                     DisconnectCommand,
                     QuitCommand,
                     PlayCommand,
-                    PingCommand
+                    PingCommand,
+                    StopCommand
                 ).start()
             },
             GlobalScope.launch {
@@ -33,7 +34,8 @@ suspend fun main(vararg params: String) {
                     QuitCommand,
                     ListCommand,
                     BackGroundCommand,
-                    PingCommand
+                    PingCommand,
+                    StopCommand
                 ).start()
             }
         )
